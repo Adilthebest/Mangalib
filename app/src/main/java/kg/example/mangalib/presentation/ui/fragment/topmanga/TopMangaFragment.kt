@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import kg.example.mangalib.databinding.FragmentTopMangaBinding
 import kg.example.mangalib.presentation.ui.base.BaseFragment
+import kg.example.mangalib.presentation.ui.fragment.topmanga.TopMangaViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MangaFragment : BaseFragment<FragmentTopMangaBinding>() {

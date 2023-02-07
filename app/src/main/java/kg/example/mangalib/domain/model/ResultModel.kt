@@ -21,7 +21,7 @@ data class ResultModel(
     val dir:String,
     val type: String,
     val updated_at: String,
-   // val description: String
+    val description: String
     )
 
     //val description: String no work,

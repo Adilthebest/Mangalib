@@ -1,4 +1,4 @@
-package kg.example.mangalib.presentation.ui.fragment
+package kg.example.mangalib.presentation.ui.fragment.topmanga
 
 import kg.example.mangalib.domain.utils.UiState
 import kg.example.mangalib.domain.model.ResultModel

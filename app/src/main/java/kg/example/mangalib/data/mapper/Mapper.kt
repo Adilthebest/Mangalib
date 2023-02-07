@@ -4,25 +4,15 @@ import kg.example.mangalib.domain.model.ResultModel
 import kg.example.mangalib.data.remote.model.ResultDto
 
 
-/*fun ResultModel.toMangas() = ResultDto(
+fun ResultModel.toMangas() = ResultDto(
+
+
     chapters_quantity,
     created_at,
     en_name,
-    genre,
-    id,
-    image,
-    issue_year,
-    likes,
-    rating,
-    ru_name,
-    dir,
-    type,
-    updated_at
+    en_name, genre, id, image, issue_year, likes, rating, ru_name, dir, type, updated_at
 
-
-
-)*/
-
+)
 
 
 fun ResultDto.toManga(): ResultModel {
@@ -40,7 +30,7 @@ fun ResultDto.toManga(): ResultModel {
         dir,
         type,
         updated_at,
-
+        description ?: ""
 
 
     )

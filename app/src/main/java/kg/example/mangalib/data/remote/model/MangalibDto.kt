@@ -10,7 +10,7 @@ data class MangalibDto(
 data class ResultDto(
     val chapters_quantity: Int,
     val created_at: String,
- //  val description: String,
+   val description: String,
     val en_name: String,
     val genre: List<Int>,
     val id: Int,

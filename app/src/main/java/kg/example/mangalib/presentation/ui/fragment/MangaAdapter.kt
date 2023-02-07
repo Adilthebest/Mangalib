@@ -44,4 +44,8 @@ return list.size
     fun array(arrayList: List<ResultModel>) {
         list = arrayList as ArrayList<ResultModel>
     }
+    /*fun setContentList (list: MutableList<ResultModel>) {
+        this.list = list
+        notifyDataSetChanged()
+    }*/
 }

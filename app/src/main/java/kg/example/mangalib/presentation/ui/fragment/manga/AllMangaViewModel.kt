@@ -1,9 +1,11 @@
-package kg.example.mangalib.presentation.ui.fragment
+package kg.example.mangalib.presentation.ui.fragment.manga
 
 import androidx.lifecycle.viewModelScope
 import kg.example.mangalib.domain.model.ResultModel
+import kg.example.mangalib.domain.usecase.GetAllMangaIdUseCase
 import kg.example.mangalib.domain.usecase.GetAllMangaUseCase
 import kg.example.mangalib.domain.usecase.GetAllTopMangaUseCase
+import kg.example.mangalib.domain.usecase.GetMangaSearchUseCase
 import kg.example.mangalib.domain.utils.Resourse
 import kg.example.mangalib.domain.utils.UiState
 import kg.example.mangalib.presentation.ui.base.BaseViewModel
@@ -15,9 +17,13 @@ import kotlinx.coroutines.flow.onEach
 
 class AllMangaViewModel(
     private val getAllMangaUseCase: GetAllMangaUseCase
+
 ) : BaseViewModel() {
     private val _getAllManga = MutableStateFlow<UiState<List<ResultModel>>>(UiState.Empty())
     val getAllManga = _getAllManga.asStateFlow()
+
+
+
 
     fun getAllManga() {
         getAllMangaUseCase.getAllManga().onEach { result->

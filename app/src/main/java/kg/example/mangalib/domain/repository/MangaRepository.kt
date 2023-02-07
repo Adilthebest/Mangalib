@@ -11,4 +11,6 @@ interface MangaRepository {
      fun getAllManga():Flow<Resourse<List<ResultModel>>>
 
      fun getAllMangaSearch(search:String):Flow<Resourse<List<ResultModel>>>
+
+     fun getAllMangaId(id:Int):Flow<Resourse<List<ResultModel>>>
 }

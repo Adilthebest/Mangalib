@@ -3,14 +3,12 @@ package kg.example.mangalib.presentation.ui.activity.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
 import kg.example.mangalib.databinding.FragmentHomeBinding
 import kg.example.mangalib.presentation.ui.base.BaseFragment
-import kg.example.mangalib.presentation.ui.fragment.AllMangaViewModel
+import kg.example.mangalib.presentation.ui.fragment.MangaAdapter
 import kg.example.mangalib.utils.ViewPagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,44 +16,67 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
+    lateinit   var adapter: MangaAdapter
 
     override fun inflate(layoutInflater: LayoutInflater): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter= MangaAdapter()
 
+    }
     override fun initListener() {
 
         val viewPager = binding.viewPager
         viewPager.adapter = ViewPagerAdapter(parentFragmentManager)
-        binding.searchId.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-if (p0 !==null){
-viewModel.getMangaSearch(p0)
-}
-return true
-            }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-
-                return true
-            }
-
-        })
     }
 
 
     override fun initView() {
-        viewModel.getMangaSearch.collectState(
-            onLoading = {
+        binding.searchId.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String): Boolean {
 
-            },
-            Error = {
-                Log.e("ololo", "error: ")
+                p0.let {
+                    viewModel.getMangaSearch(it)
+                }
 
-            },
-            onSuccess = {
-                Log.e("ololo", "success: ")
+                return false
+            }
 
+            override fun onQueryTextChange(p0: String?): Boolean {
+
+                return false
+            }
+
+        })
+
+        lifecycle.coroutineScope.launchWhenCreated {
+            viewModel.getMangaSearch.collectState({
+
+            },{
+                Log.e("ololo", "error:${it} " )
+
+            },{
+                adapter.array(it)
+                Toast.makeText(requireContext(),"success",Toast.LENGTH_SHORT).show()
+                Log.e("ololo", "success: " )
             })
-    }
+               /* if (result.isLoading){
+                    binding.viewPager.visibility = View.VISIBLE
+                }
+                if (result.error.isNotEmpty()){
+                    binding.progress.visibility = View.GONE
+
+                }
+                result.data?.let {
+                    Log.e("ololo", "success:${it} " )
+
+                    binding.progress.visibility = View.GONE
+                    adapter.array(it)
+                }*/
+            }
+        }
+
 }

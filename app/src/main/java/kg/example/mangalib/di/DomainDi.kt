@@ -1,5 +1,6 @@
 package kg.example.mangalib.di
 
+import kg.example.mangalib.domain.usecase.GetAllMangaIdUseCase
 import kg.example.mangalib.domain.usecase.GetAllMangaUseCase
 import kg.example.mangalib.domain.usecase.GetAllTopMangaUseCase
 import kg.example.mangalib.domain.usecase.GetMangaSearchUseCase
@@ -14,5 +15,8 @@ val domainModule = module {
     }
     factory {
         GetMangaSearchUseCase(repository = get( ))
+    }
+    factory {
+        GetAllMangaIdUseCase(repository = get( ))
     }
 }
