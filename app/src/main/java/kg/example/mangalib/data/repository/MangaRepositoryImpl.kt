@@ -9,7 +9,7 @@ import kg.example.mangalib.domain.utils.Resourse
 import kotlinx.coroutines.flow.Flow
 
 class MangaRepositoryImpl(val api: ApiService) : MangaRepository, BaseRepository() {
-
+val s:String = String()
     override fun getAllTopManga(): Flow<Resourse<List<ResultModel>>> = doReguest {
         api.getAllTopManga().map { it.toManga() }
     }
@@ -18,6 +18,19 @@ class MangaRepositoryImpl(val api: ApiService) : MangaRepository, BaseRepository
         api.getAllManga().map { it.toManga() }
 
     }
+
+    /*override fun Paging(limit: Int, offset: Int): Flow<PagingData<MangalibModel>> {
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MangaListPagingSource(api,s)
+            }
+        ).flow
+    }*/
 
     override fun getAllMangaSearch(search: String): Flow<Resourse<List<ResultModel>>> = doReguest {
         api.getAllMangaSearch(search).map { it.toManga() }

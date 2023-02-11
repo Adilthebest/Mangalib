@@ -40,7 +40,7 @@ class HomeViewModel (
                 }
             }
         }.launchIn(viewModelScope)*/
-   fun getMangaSearch(search:String) {
+   /*fun getMangaSearch(search:String) {
        getMangaSearchUseCase.getMangaSearch(search).onEach { result->
            when(result){
                is Resourse.Success ->{
@@ -56,8 +56,8 @@ class HomeViewModel (
 
                }
            }
-       }.launchIn(viewModelScope)
-   }
+       }.launchIn(viewModelScope)*/
+
 
 }
 

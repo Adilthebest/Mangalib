@@ -3,17 +3,17 @@ package kg.example.mangalib.presentation.ui.fragment.manga
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import kg.example.mangalib.R
 import kg.example.mangalib.databinding.FragmentAllMangaBinding
 import kg.example.mangalib.presentation.ui.base.BaseFragment
 import kg.example.mangalib.presentation.ui.fragment.MangaAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AllMangaFragment : BaseFragment<FragmentAllMangaBinding>() {
-    private val viewModel: AllMangaViewModel by viewModel()
+    private val viewModel: AllMangaViewModel by sharedViewModel ()
     lateinit var adapter: MangaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,29 +29,44 @@ class AllMangaFragment : BaseFragment<FragmentAllMangaBinding>() {
 
     override fun initListener() {
 
-        viewModel.getAllManga()
         lifecycle.coroutineScope.launchWhenCreated {
 
             viewModel.getAllManga.collectState(
                 onLoading = {
-
+binding.progress.visibility = View.VISIBLE
                 },
                 Error = {
-                    Log.e("ololo", "error: ")
+                    binding.progress.visibility = View.GONE
 
                 },
                 onSuccess = {
+                    binding.progress.visibility = View.GONE
+
                     binding.recycle.adapter = adapter
-                    adapter.array(it)
-                    Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
-                    Log.e("ololo", "success: ")
+                    adapter.array(it )
                 })
         }
-    }
+        lifecycle.coroutineScope.launchWhenCreated {
+            viewModel.getMangaSearch.collectState({
+                binding.progress.visibility = View.VISIBLE
+                binding.tvSearchError.visibility = View.GONE
+
+            },{
+                binding.tvSearchError.visibility = View.VISIBLE
+
+                binding.tvSearchError.text= it
+
+
+            },{
+                binding.progress.visibility = View.GONE
+                binding.tvSearchError.visibility = View.INVISIBLE
+
+                binding.recycle.adapter = adapter
+                adapter.setContentList(it.toMutableList())
+            })
+    }}
 
     override fun initView() {
-
-
         adapter.onClick = {
             val bundle = Bundle()
             bundle.putInt("key", it.id)

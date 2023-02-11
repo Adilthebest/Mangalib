@@ -1,31 +1,22 @@
 package kg.example.mangalib.presentation.ui.activity.ui.home
 
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.lifecycle.coroutineScope
 import kg.example.mangalib.databinding.FragmentHomeBinding
 import kg.example.mangalib.presentation.ui.base.BaseFragment
-import kg.example.mangalib.presentation.ui.fragment.MangaAdapter
+import kg.example.mangalib.presentation.ui.fragment.manga.AllMangaViewModel
 import kg.example.mangalib.utils.ViewPagerAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val viewModel: HomeViewModel by viewModel()
-    lateinit   var adapter: MangaAdapter
+    private val viewModel: AllMangaViewModel by sharedViewModel()
 
     override fun inflate(layoutInflater: LayoutInflater): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        adapter= MangaAdapter()
 
-    }
     override fun initListener() {
 
         val viewPager = binding.viewPager
@@ -52,31 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         })
 
-        lifecycle.coroutineScope.launchWhenCreated {
-            viewModel.getMangaSearch.collectState({
-
-            },{
-                Log.e("ololo", "error:${it} " )
-
-            },{
-                adapter.array(it)
-                Toast.makeText(requireContext(),"success",Toast.LENGTH_SHORT).show()
-                Log.e("ololo", "success: " )
-            })
-               /* if (result.isLoading){
-                    binding.viewPager.visibility = View.VISIBLE
-                }
-                if (result.error.isNotEmpty()){
-                    binding.progress.visibility = View.GONE
-
-                }
-                result.data?.let {
-                    Log.e("ololo", "success:${it} " )
-
-                    binding.progress.visibility = View.GONE
-                    adapter.array(it)
-                }*/
-            }
-        }
+    }
 
 }

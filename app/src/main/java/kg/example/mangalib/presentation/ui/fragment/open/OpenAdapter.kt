@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import kg.example.mangalib.databinding.ItemMangaBinding
 import kg.example.mangalib.databinding.ItemOpenBinding
 import kg.example.mangalib.domain.model.ResultModel
 

@@ -1,7 +1,9 @@
 package kg.example.mangalib.data.mapper
 
+import kg.example.mangalib.data.remote.model.MangalibDto
 import kg.example.mangalib.domain.model.ResultModel
 import kg.example.mangalib.data.remote.model.ResultDto
+import kg.example.mangalib.domain.model.MangalibModel
 
 
 fun ResultModel.toMangas() = ResultDto(
@@ -10,7 +12,7 @@ fun ResultModel.toMangas() = ResultDto(
     chapters_quantity,
     created_at,
     en_name,
-    en_name, genre, id, image, issue_year, likes, rating, ru_name, dir, type, updated_at
+    description, genre, id, image, issue_year, likes, rating, ru_name, dir, type, updated_at
 
 )
 
@@ -34,20 +36,21 @@ fun ResultDto.toManga(): ResultModel {
 
 
     )
+
 }
-
-
-/*
-fun MangalibModel.toDataMango() = kg.example.mangalib.domain.model.MangalibModel(
+fun MangalibDto.toDataMango() = kg.example.mangalib.domain.model.MangalibModel(
     count,
     next,
     previous,
     results.map { it.toManga() }
 )
-fun kg.example.mangalib.domain.model.MangalibModel.toDomainManga() = MangalibModel(
+fun kg.example.mangalib.domain.model.MangalibModel.toDomainManga() = MangalibDto(
     count,
     next,
     previous,
-    results.map { it.toManga() }
+    results.map { it.toMangas() }
 )
-*/
+
+
+
+

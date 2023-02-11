@@ -24,5 +24,4 @@ data class ResultModel(
     val description: String
     )
 
-    //val description: String no work,
 
