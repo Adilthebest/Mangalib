@@ -9,13 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Query
 
 interface MangaRepository {
-     fun getAllTopManga():Flow<Resourse<List<ResultModel>>>
+    fun getAllTopManga(): Flow<Resourse<List<ResultModel>>>
 
-     fun getAllManga( ):Flow<Resourse<List<ResultModel>>>
+    fun getAllManga(): Flow<Resourse<List<ResultModel>>>
 
-   //  fun Paging( limit:Int,offset:Int):Flow<PagingData<MangalibModel>>
+    fun getAllMangaSearch(search: String): Flow<Resourse<List<ResultModel>>>
 
-     fun getAllMangaSearch(search:String):Flow<Resourse<List<ResultModel>>>
-
-     fun getAllMangaId(id:Int):Flow<Resourse<List<ResultModel>>>
+    fun getAllMangaId(id: Int): Flow<Resourse<List<ResultModel>>>
 }

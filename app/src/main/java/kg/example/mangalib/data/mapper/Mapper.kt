@@ -7,12 +7,20 @@ import kg.example.mangalib.domain.model.MangalibModel
 
 
 fun ResultModel.toMangas() = ResultDto(
-
-
     chapters_quantity,
     created_at,
     en_name,
-    description, genre, id, image, issue_year, likes, rating, ru_name, dir, type, updated_at
+    description,
+    genre,
+    id,
+    image,
+    issue_year,
+    likes,
+    rating,
+    ru_name,
+    dir,
+    type,
+    updated_at
 
 )
 
@@ -38,13 +46,13 @@ fun ResultDto.toManga(): ResultModel {
     )
 
 }
-fun MangalibDto.toDataMango() = kg.example.mangalib.domain.model.MangalibModel(
+fun MangalibDto.toDataMango() = MangalibModel(
     count,
     next,
     previous,
     results.map { it.toManga() }
 )
-fun kg.example.mangalib.domain.model.MangalibModel.toDomainManga() = MangalibDto(
+fun MangalibModel.toDomainManga() = MangalibDto(
     count,
     next,
     previous,

@@ -53,14 +53,10 @@ binding.progress.visibility = View.VISIBLE
 
             },{
                 binding.tvSearchError.visibility = View.VISIBLE
-
                 binding.tvSearchError.text= it
-
-
             },{
                 binding.progress.visibility = View.GONE
                 binding.tvSearchError.visibility = View.INVISIBLE
-
                 binding.recycle.adapter = adapter
                 adapter.setContentList(it.toMutableList())
             })
